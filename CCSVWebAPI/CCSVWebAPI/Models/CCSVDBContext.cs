@@ -256,7 +256,7 @@ public partial class CcsvdbContext : DbContext
             entity.Property(e => e.TotalPedido).HasColumnType("decimal(7, 2)");
             entity.Property(e => e.TotalProductosPedido).HasColumnType("decimal(7, 2)");
 
-            entity.HasOne(d => d.IdProveedorNavigation).WithMany(p => p.Pedidos)
+            entity.HasOne(d => d.Proveedor).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.IdProveedor)
                 .HasConstraintName("FK__Pedidos__IdProve__2F10007B");
         });
