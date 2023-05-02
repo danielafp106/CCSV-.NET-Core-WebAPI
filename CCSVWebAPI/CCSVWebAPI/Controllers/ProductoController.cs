@@ -26,12 +26,12 @@ namespace CCSVWebAPI.Controllers
             List<Producto> productos = new List<Producto>();
             try
             {
-                productos = _dbContext.Productos.ToList();
+                productos = _dbContext.Productos.Include(p => p.PreciosProductos).ToList();
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", response = productos });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message, response = productos });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message, response = productos });
             }
         }
         [HttpGet]
@@ -45,11 +45,12 @@ namespace CCSVWebAPI.Controllers
             }
             try
             {
+                productos = _dbContext.Productos.Include(p=>p.PreciosProductos).Where(p=>p.IdProducto== idProducto).FirstOrDefault();
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", response = productos });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message, response = productos });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message, response = productos });
             }
         }
 
@@ -67,7 +68,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
             }
         }
 
@@ -93,7 +94,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
             }
         }
 
@@ -115,7 +116,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
             }
         }
 

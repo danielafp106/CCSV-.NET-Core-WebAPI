@@ -292,11 +292,11 @@ public partial class CcsvdbContext : DbContext
             entity.Property(e => e.PrecioPublico).HasColumnType("decimal(7, 2)");
             entity.Property(e => e.TarifaEnvio).HasColumnType("decimal(7, 2)");
 
-            entity.HasOne(d => d.IdPedidoNavigation).WithMany(p => p.PreciosProductos)
+            entity.HasOne(d => d.Pedido).WithMany(p => p.PreciosProductos)
                 .HasForeignKey(d => d.IdPedido)
                 .HasConstraintName("FK__PreciosPr__IdPed__34C8D9D1");
 
-            entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.PreciosProductos)
+            entity.HasOne(d => d.Producto).WithMany(p => p.PreciosProductos)
                 .HasForeignKey(d => d.IdProducto)
                 .HasConstraintName("FK__PreciosPr__IdPro__33D4B598");
         });

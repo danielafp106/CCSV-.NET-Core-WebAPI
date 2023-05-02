@@ -31,7 +31,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message, response = proveedor });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message, response = proveedor });
             }
         }
 
@@ -50,7 +50,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message, response = proveedor });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message, response = proveedor });
             }
         }
 
@@ -68,7 +68,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
             }
         }
 
@@ -94,7 +94,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
             }
         }
 
@@ -116,7 +116,7 @@ namespace CCSVWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
             }
         }
 

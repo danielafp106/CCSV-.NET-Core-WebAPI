@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CCSVWebAPI.Models;
 
@@ -32,8 +33,8 @@ public partial class PrecioProducto
     public int? StockTotalRealTime { get; set; }
 
     public virtual ICollection<DetalleProductoModelo> DetalleProductosModelos { get; set; } = new List<DetalleProductoModelo>();
-
-    public virtual Pedido? IdPedidoNavigation { get; set; }
-
-    public virtual Producto? IdProductoNavigation { get; set; }
+    [JsonIgnore]
+    public virtual Pedido? Pedido { get; set; }
+    [JsonIgnore]
+    public virtual Producto? Producto { get; set; }
 }
