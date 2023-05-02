@@ -105,11 +105,11 @@ public partial class CcsvdbContext : DbContext
 
             entity.Property(e => e.IdModelo).HasMaxLength(10);
 
-            entity.HasOne(d => d.IdModeloNavigation).WithMany(p => p.DetalleProductosModelos)
+            entity.HasOne(d => d.Modelo).WithMany(p => p.DetalleProductosModelos)
                 .HasForeignKey(d => d.IdModelo)
                 .HasConstraintName("FK__DetallePr__IdMod__3D5E1FD2");
 
-            entity.HasOne(d => d.IdPrecioProductoNavigation).WithMany(p => p.DetalleProductosModelos)
+            entity.HasOne(d => d.PrecioProducto).WithMany(p => p.DetalleProductosModelos)
                 .HasForeignKey(d => d.IdPrecioProducto)
                 .HasConstraintName("FK__DetallePr__IdPre__3C69FB99");
         });
@@ -185,7 +185,7 @@ public partial class CcsvdbContext : DbContext
             entity.Property(e => e.IdMarca).HasMaxLength(10);
             entity.Property(e => e.NombreModelo).HasMaxLength(100);
 
-            entity.HasOne(d => d.IdMarcaNavigation).WithMany(p => p.Modelos)
+            entity.HasOne(d => d.Marca).WithMany(p => p.Modelos)
                 .HasForeignKey(d => d.IdMarca)
                 .HasConstraintName("FK__Modelos__IdMarca__398D8EEE");
         });
