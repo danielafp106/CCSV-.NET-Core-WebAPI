@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CCSVWebAPI.Models;
 
@@ -20,6 +21,6 @@ public partial class Venta
     public decimal? VentaTotalFinal { get; set; }
 
     public decimal? Ganancia { get; set; }
-
+    [JsonIgnore]
     public virtual Orden? IdOrdenNavigation { get; set; }
 }

@@ -205,27 +205,27 @@ public partial class CcsvdbContext : DbContext
             entity.Property(e => e.IdTipoEnvio).HasMaxLength(5);
             entity.Property(e => e.IdTipoPago).HasMaxLength(5);
 
-            entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Ordenes)
+            entity.HasOne(d => d.Cliente).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.IdCliente)
                 .HasConstraintName("FK__Ordenes__IdClien__5441852A");
 
-            entity.HasOne(d => d.IdEstadoOrdenNavigation).WithMany(p => p.Ordenes)
+            entity.HasOne(d => d.EstadoOrden).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.IdEstadoOrden)
                 .HasConstraintName("FK__Ordenes__IdEstad__5629CD9C");
 
-            entity.HasOne(d => d.IdLugarEntregaNavigation).WithMany(p => p.Ordenes)
+            entity.HasOne(d => d.LugarEntrega).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.IdLugarEntrega)
                 .HasConstraintName("FK__Ordenes__IdLugar__5812160E");
 
-            entity.HasOne(d => d.IdMedioVentaNavigation).WithMany(p => p.Ordenes)
+            entity.HasOne(d => d.MedioVenta).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.IdMedioVenta)
                 .HasConstraintName("FK__Ordenes__IdMedio__5535A963");
 
-            entity.HasOne(d => d.IdTipoEnvioNavigation).WithMany(p => p.Ordenes)
+            entity.HasOne(d => d.TipoEnvio).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.IdTipoEnvio)
                 .HasConstraintName("FK__Ordenes__IdTipoE__571DF1D5");
 
-            entity.HasOne(d => d.IdTipoPagoNavigation).WithMany(p => p.Ordenes)
+            entity.HasOne(d => d.TipoPago).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.IdTipoPago)
                 .HasConstraintName("FK__Ordenes__IdTipoP__59063A47");
         });

@@ -15,6 +15,8 @@ public partial class PrecioPaqueteria
 
     public int? StockTotalCompradoPaqueteria { get; set; }
 
+    public bool? EsPaqueteriaRecurrente { get; set; }
+
     public DateTime? FechaCompra { get; set; }
 
     public DateTime? FechaInicioUso { get; set; }

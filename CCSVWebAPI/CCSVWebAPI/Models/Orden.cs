@@ -27,17 +27,17 @@ public partial class Orden
 
     public virtual ICollection<DetalleProductoOrden> DetalleProductosOrdenes { get; set; } = new List<DetalleProductoOrden>();
 
-    public virtual Cliente? IdClienteNavigation { get; set; }
+    public virtual Cliente? Cliente { get; set; }
 
-    public virtual EstadoOrden? IdEstadoOrdenNavigation { get; set; }
+    public virtual EstadoOrden? EstadoOrden { get; set; }
 
-    public virtual LugarEntrega? IdLugarEntregaNavigation { get; set; }
+    public virtual LugarEntrega? LugarEntrega{ get; set; }
 
-    public virtual MedioVenta? IdMedioVentaNavigation { get; set; }
+    public virtual MedioVenta? MedioVenta { get; set; }
 
-    public virtual TipoEnvio? IdTipoEnvioNavigation { get; set; }
+    public virtual TipoEnvio? TipoEnvio { get; set; }
 
-    public virtual TipoPago? IdTipoPagoNavigation { get; set; }
+    public virtual TipoPago? TipoPago{ get; set; }
 
     public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 }

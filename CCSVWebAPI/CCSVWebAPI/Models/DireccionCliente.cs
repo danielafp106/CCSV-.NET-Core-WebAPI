@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CCSVWebAPI.Models;
 
@@ -14,6 +15,6 @@ public partial class DireccionCliente
     public string? DepartamentoCliente { get; set; }
 
     public string? Direccion { get; set; }
-
+    [JsonIgnore]
     public virtual Cliente? IdClienteNavigation { get; set; }
 }
