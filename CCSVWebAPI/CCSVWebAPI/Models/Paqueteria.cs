@@ -13,7 +13,7 @@ public partial class Paqueteria
 
     public string? UrlImagenPaqueteria { get; set; }
 
-    public virtual Proveedor? IdProveedorNavigation { get; set; }
+    public virtual Proveedor? Proveedor { get; set; }
 
     public virtual ICollection<PrecioPaqueteria> PreciosPaqueteria { get; set; } = new List<PrecioPaqueteria>();
 }

@@ -38,7 +38,7 @@ namespace CCSVWebAPI.Controllers
 
         [HttpGet]
         [Route("ObtenerPrecioPaqueteria/{idPrecioPaqueteria}")]
-        public IActionResult ObtenerPrecioPaqueteria(string idPrecioPaqueteria)
+        public IActionResult ObtenerPrecioPaqueteria(int idPrecioPaqueteria)
         {
             PrecioPaqueteria pp = _dbContext.PreciosPaqueteria.Find(idPrecioPaqueteria);
             if (pp == null)
@@ -104,7 +104,7 @@ namespace CCSVWebAPI.Controllers
 
         [HttpGet]
         [Route("VerificarIDPrecioPaqueteria/{idPrecioPaqueteria}")]
-        public IActionResult VerificarIDPrecioPaqueteria(string idPrecioPaqueteria)
+        public IActionResult VerificarIDPrecioPaqueteria(int idPrecioPaqueteria)
         {
             PrecioPaqueteria ppOriginal = _dbContext.PreciosPaqueteria.Find(idPrecioPaqueteria);
             if (ppOriginal == null)
@@ -119,7 +119,7 @@ namespace CCSVWebAPI.Controllers
 
         [HttpDelete]
         [Route("EliminarPrecioPaqueteria/{idPrecioPaqueteria}")]
-        public IActionResult EliminarPrecioPaqueteria(string idPrecioPaqueteria)
+        public IActionResult EliminarPrecioPaqueteria(int idPrecioPaqueteria)
         {
             PrecioPaqueteria ppEliminar = _dbContext.PreciosPaqueteria.Find(idPrecioPaqueteria);
             if (ppEliminar == null)

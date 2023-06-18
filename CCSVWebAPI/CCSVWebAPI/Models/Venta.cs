@@ -21,6 +21,8 @@ public partial class Venta
     public decimal? VentaTotalFinal { get; set; }
 
     public decimal? Ganancia { get; set; }
+
+    public decimal? Descuento { get; set; }
     [JsonIgnore]
     public virtual Orden? IdOrdenNavigation { get; set; }
 }

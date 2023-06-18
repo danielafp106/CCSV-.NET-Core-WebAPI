@@ -11,7 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<CcsvdbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
+builder.Services.AddDbContext<CcsvdbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"));
+    opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+});
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;

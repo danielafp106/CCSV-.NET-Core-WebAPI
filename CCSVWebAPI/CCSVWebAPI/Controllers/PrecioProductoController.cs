@@ -102,6 +102,12 @@ namespace CCSVWebAPI.Controllers
 
                 _dbContext.PreciosProductos.Update(ppOriginal);
                 _dbContext.SaveChanges();
+
+                if (CalcularTotales(ppModificado.IdPedido) == false)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Algo salió mal.." });
+                }
+
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK" });
             }
             catch (Exception ex)
@@ -119,6 +125,12 @@ namespace CCSVWebAPI.Controllers
             {
                 _dbContext.PreciosProductos.Add(precioproducto);
                 _dbContext.SaveChanges();
+
+                if (CalcularTotales(precioproducto.IdPedido) == false)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Algo salió mal.." });
+                }
+
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK" });
             }
             catch (Exception ex)
@@ -129,7 +141,7 @@ namespace CCSVWebAPI.Controllers
 
         [HttpDelete]
         [Route("EliminarPrecioProducto/{idPrecioProducto:int}")]
-        public IActionResult EliminarPrecioProducto(string idPrecioProducto)
+        public IActionResult EliminarPrecioProducto(int idPrecioProducto)
         {
             PrecioProducto precioproducto = _dbContext.PreciosProductos.Find(idPrecioProducto);
             if (precioproducto == null)
@@ -141,11 +153,60 @@ namespace CCSVWebAPI.Controllers
             {
                 _dbContext.PreciosProductos.Remove(precioproducto);
                 _dbContext.SaveChanges();
+
+                if (CalcularTotales(precioproducto.IdPedido) == false)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Algo salió mal.." });
+                }
+
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK" });
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
+            }
+        }
+
+        private bool CalcularTotales(string idPedido)
+        {
+            try
+            {
+                //El pedido
+                Pedido pedido = _dbContext.Pedidos.Where(p => p.IdPedido == idPedido).FirstOrDefault();
+                //Todos los productos del pedido
+                List<PrecioProducto> todosPP = _dbContext.PreciosProductos.Where(pp => pp.IdPedido == idPedido).ToList();
+
+                decimal compraTotal = 0;
+                decimal importacionTotal = (decimal)(pedido.TotalImportePedido);
+                decimal sumaTotalPP = 0;
+                int countPP = (int)todosPP.Sum(p => p.StockTotalComprado);
+                var precioImportacionUnidad = (importacionTotal != 0 && countPP!=0) ? Math.Round((decimal)(importacionTotal / countPP), 2) : 0;
+                sumaTotalPP = sumaTotalPP + importacionTotal;
+
+                foreach (var PP in todosPP)
+                {
+                    PrecioProducto actualPP = PP;
+                    actualPP.Importacion = precioImportacionUnidad;
+                    _dbContext.ChangeTracker.Clear();
+                    _dbContext.Update(actualPP);
+                    _dbContext.SaveChanges();
+                    sumaTotalPP = sumaTotalPP + (decimal)actualPP.CompraTotalProducto;
+                    compraTotal = compraTotal + (decimal)actualPP.CompraTotalProducto;
+                }
+                pedido.TotalPedido = compraTotal;
+                pedido.TotalProductosPedido = sumaTotalPP;
+                pedido.StockPedido = countPP;
+                _dbContext.ChangeTracker.Clear();
+                _dbContext.Pedidos.Update(pedido);
+                _dbContext.SaveChanges();
+
+                return true;
+
+
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

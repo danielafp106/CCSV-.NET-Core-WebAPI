@@ -91,6 +91,7 @@ namespace CCSVWebAPI.Controllers
                 ventaOriginal.CostoGuía = ventaModificado.CostoGuía is null ? ventaOriginal.CostoGuía : ventaModificado.CostoGuía;
                 ventaOriginal.VentaTotalFinal = ventaModificado.VentaTotalFinal is null ? ventaOriginal.VentaTotalFinal : ventaModificado.VentaTotalFinal;
                 ventaOriginal.Ganancia = ventaModificado.Ganancia is null ? ventaOriginal.Ganancia : ventaModificado.Ganancia;
+                ventaOriginal.Descuento = ventaModificado.Descuento is null ? ventaOriginal.Descuento : ventaModificado.Descuento;
 
                 _dbContext.Ventas.Update(ventaOriginal);
                 _dbContext.SaveChanges();

@@ -20,13 +20,13 @@ namespace CCSVWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerPaqueteria")]
-        public IActionResult ObtenerPaqueteria()
+        [Route("ObtenerPaqueterias")]
+        public IActionResult ObtenerPaqueterias()
         {
             List<Paqueteria> paqueterias = new List<Paqueteria>();
             try
             {
-                paqueterias = _dbContext.Paqueteria.Include(p => p.PreciosPaqueteria).ToList();
+                paqueterias = _dbContext.Paqueteria.Include(p => p.PreciosPaqueteria).Include(p => p.Proveedor).ToList();
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", response = paqueterias });
             }
             catch (Exception ex)

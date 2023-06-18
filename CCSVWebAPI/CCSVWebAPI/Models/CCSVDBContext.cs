@@ -239,7 +239,7 @@ public partial class CcsvdbContext : DbContext
             entity.Property(e => e.NombrePaqueteria).HasMaxLength(50);
             entity.Property(e => e.UrlImagenPaqueteria).HasMaxLength(200);
 
-            entity.HasOne(d => d.IdProveedorNavigation).WithMany(p => p.Paqueteria)
+            entity.HasOne(d => d.Proveedor).WithMany(p => p.Paqueteria)
                 .HasForeignKey(d => d.IdProveedor)
                 .HasConstraintName("FK__Paqueteri__IdPro__29572725");
         });
